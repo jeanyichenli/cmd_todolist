@@ -39,7 +39,6 @@ func main() {
 					} else {
 						break
 					}
-
 				}
 				fmt.Printf("The item you want to remove is %v. %s. \n", id, tasks[id-1])
 				fmt.Printf("Ensure you want to delete:[Y/n] ")
@@ -69,8 +68,13 @@ func main() {
 				}
 				fmt.Printf("Mission [%s] is complete.\n", tasks[id-1])
 				id--
-				tasks = append(tasks[:id], tasks[id+1:]...)
 				complete = append(complete, tasks[id])
+				if id == len(tasks) { // tail element
+					tasks = tasks[:id]
+				} else {
+					tasks = append(tasks[:id], tasks[id+1:]...)
+				}
+
 			case "list":
 				idx := 1
 				for _, t := range tasks {
